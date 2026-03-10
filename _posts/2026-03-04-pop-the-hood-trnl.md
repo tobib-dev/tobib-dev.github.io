@@ -16,7 +16,7 @@ Going Dynamic (Beyond Static Routing)
 
 ## What exactly is HTTP?
 According to MDN:
-> HTTP is an application-layer protocol for transmitting hypermedia documents, such as HTML. It was designed for communicating between web browsers and web servers, but can also be used for other purposes, such as machine-to-machine communication, programmatic access to APIs, and more.”
+> HTTP is an application-layer protocol for transmitting hypermedia documents, such as HTML. It was designed for communicating between web browsers and web servers, but can also be used for other purposes, such as machine-to-machine communication, programmatic access to APIs, and more.
 
 Two phrases stand out to me in this definition and will shape what I discuss in the section and the next two sections: the first is the application-layer protocol, and the second is communication between web browsers and web servers. Chances are that if you are reading this, you know what an application-layer protocol is, but if you aren’t, you are in luck. The vast majority of what we do today as software engineers is built on the network stack, sometimes referred to as TCP/IP or the OSI Model. The OSI model is a conceptual framework for understanding networking layers, while TCP/IP is more of a practical, real-world implementation. The OSI model divides networking into seven conceptual layers, but for this article, we are only concerned about the Transport and Application layers:
 Transport Layer: This layer is what powers web servers as we know them today, using Sockets. There are different types of sockets, but we are most focused on IP Sockets, which can be further classified into two: TCP and UDP Sockets.
@@ -30,11 +30,11 @@ If you remember nothing else from this section, remember this: HTTP defines the 
 
 ## How Does the Transport Layer Power HTTP
 The transport layer, as briefly explained above, uses IP sockets to power HTTP. What exactly are sockets? I remember a couple of years ago hearing the famous saying “Everything in Linux is a file” and I took it at face value, thinking it meant that everything in Linux is a literal file (a config, a file, a folder), but it doesn’t. In Unix/Linux systems a file is represented by an integer called a file descriptor, the file descriptor is what systems uses to write and read from a file, but the file descriptors are used by everything on the systems from devices (keyboard, mice, mic, speakers), to actual files, to network connections (databases, cache, clients, servers), and even the terminal itself. To quote Beej: 
-> “A file descriptor is simply an integer associated with an open file.”
+> A file descriptor is simply an integer associated with an open file.
 
 ### Sockets
 A socket, according to Wikipedia, is defined as follows:
-> "A software structure within a network node that serves as an endpoint for sending and receiving data across the network."
+> A software structure within a network node that serves as an endpoint for sending and receiving data across the network.
 In layman’s terms, a socket is just a means for communicating between two programs (a client and server in our case). In this article, I will mainly focus on one type of socket: IP Sockets, which are used to communicate between two programs over the Internet Protocol.
 There are two types of IP sockets: TCP sockets (aka Stream Sockets) and UDP sockets (aka Datagram Sockets). HTTP 1.1 uses TCP, and since Trnl is an HTTP 1.1 implementation, we will focus mainly on TCP. TCP sockets are the primary type of socket used in most API development today, since most APIs use HTTP 1.1 or HTTP 2. They are so well used because they are very reliable and connection-oriented. Hence, they are often used in applications where reliability is very important. UDP, unlike TCP, isn’t as reliable because it’s connectionless, but it’s very performant.
 Sockets provide interfaces to system calls that enable us to create file descriptors in our programs, which other programs can use to initiate a communication channel. These APIs are essential because every HTTP library, package, or framework ultimately sits on top of these socket abstractions.
@@ -128,8 +128,10 @@ In the snippet above, routeKey is a type with 2 fields: the HTTP method and the 
 But while hash maps are excellent for exact matches, they don’t naturally support dynamic segments such as ```/api/users/:id``` without more complex parsing logic. What’s a data structure that is very flexible for this type of use case but is still fast enough that we won’t have a lot of performance overhead?
 
 ## Going Dynamic (Beyond Static Routing)
-If you guessed Tries, you would be right. If you’ve taken any form of Data Structures and Algorithms class or attempted Leetcode, you have likely come across Tries. “Tries are a tree-based data structure used primarily to store and retrieve a dynamic set of strings.” [Tries Wikipedia](https://en.wikipedia.org/wiki/Trie)
-In this section, we will cover a special type of tries called Radix Tries, which are themselves a special type of Prefix Tries. Prefix Tries are a type of tree data structure mainly used in storing strings, especially for cases where we need distinct strings. They work well for this scenario because you can store similar words, such as “point” and “pointer,” in the trie while reusing matched characters. For instance, if you want to store a word point, you can load it into the trie and denote the last character “t” as the end of the word. If you later get the word “pointer”, you just need to iterate all the way up to “t”, then add characters “e” and “r”, and denote r as the last character for the word “pointer”. This means we can store lots of strings in a trie with as few duplicates as possible. Prefix Tries are usually implemented as below.
+If you guessed Tries, you would be right. If you’ve taken any form of Data Structures and Algorithms class or attempted Leetcode, you have likely come across Tries. 
+>Tries are a tree-based data structure used primarily to store and retrieve a dynamic set of strings.
+[Tries Wikipedia](https://en.wikipedia.org/wiki/Trie)
+In this section, we will cover a special type of tries called Radix Tries, which are themselves a special type of Prefix Tries. Prefix Tries are a type of tree data structure mainly used in storing strings, especially for cases where we need distinct strings. They work well for this scenario because you can store similar words, such as ```point``` and ```pointer```, in the trie while reusing matched characters. For instance, if you want to store a word point, you can load it into the trie and denote the last character ```t``` as the end of the word. If you later get the word ```pointer```, you just need to iterate all the way up to ```t```, then add characters ```e``` and ```r```, marking ```r``` as the last character for the word ```pointer```. This means we can store lots of strings in a trie with as few duplicates as possible. Prefix Tries are usually implemented as below.
 
 ```
 type Node struct {
