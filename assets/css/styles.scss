@@ -1,0 +1,306 @@
+---
+---
+
+// Fonts
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&display=swap");
+
+// Variables (Tokyo Night Palette inspired)
+$bg-body: #1a1b26;
+$bg-terminal: #24283b; // Slightly lighter than body
+$text-main: #c0caf5;
+$text-muted: #565f89;
+$border-color: #414868;
+
+$color-red: #f7768e;
+$color-green: #9ece6a;
+$color-yellow: #e0af68;
+$color-blue: #7aa2f7;
+$color-magenta: #bb9af7;
+$color-cyan: #7dcfff;
+$color-white: #a9b1d6;
+
+$font-stack: "Fira Code", "Courier New", Courier, monospace;
+
+// Reset & Base
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: $bg-body;
+    color: $text-main;
+    font-family: $font-stack;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+// Typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $color-blue;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 2rem;
+    border-bottom: 2px dashed $border-color;
+    padding-bottom: 0.5rem;
+}
+h2 {
+    font-size: 1.5rem;
+}
+
+a {
+    color: $color-cyan;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+        color: $color-green;
+        text-decoration: underline;
+    }
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+ul {
+    list-style-type: square;
+
+    li::marker {
+        color: $color-yellow;
+    }
+}
+
+code {
+    background: rgba($color-blue, 0.1);
+    color: $color-magenta;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: inherit;
+}
+
+pre {
+    background: #16161e; // Darker block
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid $border-color;
+    overflow-x: auto;
+
+    code {
+        background: none;
+        color: inherit;
+        padding: 0;
+    }
+}
+
+blockquote {
+    border-left: 3px solid $color-magenta;
+    margin-left: 0;
+    padding-left: 1rem;
+    color: $text-muted;
+    font-style: italic;
+}
+
+// Add this to your Utilities or Base section
+img {
+    max-width: 100%; // Prevents image from being wider than the terminal
+    height: auto; // Maintains aspect ratio to avoid distortion
+    display: block;
+    margin: 1.5rem auto; // Centers images and gives them breathing room
+    border-radius: 4px;
+    border: 1px solid $border-color;
+    image-rendering: auto; // Ensures the browser uses standard smoothing
+}
+
+// Terminal Layout
+.terminal-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 60px 40px;
+    @media (max-width: 600px) {
+        padding: 20px 10px;
+    } // Flush on mobile
+}
+
+.terminal-window {
+    width: 100%;
+    max-width: 1100px;
+    background-color: $bg-terminal;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid $border-color;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 90vh;
+}
+
+.terminal-bar {
+    background-color: #16161e;
+    height: 40px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $border-color;
+    position: relative;
+    user-select: none;
+}
+
+.terminal-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+
+    &.close {
+        background-color: $color-red;
+    }
+    &.minimize {
+        background-color: $color-yellow;
+    }
+    &.maximize {
+        background-color: $color-green;
+    }
+}
+
+.terminal-title {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: $color-white;
+}
+
+.terminal-content {
+    padding: 40px 60px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 600px) {
+        padding: 20px;
+    }
+}
+
+// Navigation
+// Navigation - Tabbed Style
+.navigation {
+    margin: -30px -30px 30px -30px; // Flushes the nav to the window edges
+    background-color: darken($bg-terminal, 4%);
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid $border-color;
+
+    nav {
+        display: flex;
+        gap: 10px; // Small gap between tabs
+        flex_wrap: nowrap;
+    }
+
+    .nav-link {
+        padding: 12px 20px;
+        color: $text-muted;
+        background-color: transparent;
+        border-right: none;
+        font-size: 0.85rem;
+        transition: all 0.2s;
+
+        &:hover {
+            color: $color-cyan;
+            background-color: rgba($color-blue, 0.05);
+            text-decoration: none;
+        }
+
+        // Simulating an "Active" tab look
+        &[href="{{ page.url | relative_url }}"] {
+            color: $color-blue;
+            background-color: $bg-terminal;
+            border-bottom: 2px solid $color-blue;
+        }
+    }
+}
+
+// Footer / Prompt
+.terminal-footer {
+    margin-top: auto;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    color: $text-muted;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prompt {
+    color: $color-green;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.blinking-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    background-color: $text-muted;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+// Utilities
+.text-center {
+    text-align: center;
+}
+
+// Mobile Responsiveness
+@media (max-width: 600px) {
+    .terminal-wrapper {
+        padding: 10px;
+        align-items: flex-start; // Align to top on mobile
+    }
+
+    .terminal-window {
+        min-height: 80vh;
+    }
+
+    .terminal-content {
+        padding: 15px;
+    }
+
+    .terminal-title {
+        display: none;
+    }
+}
+
+main {
+    margin-bottom: 40px;
+}
+
+.path-root {
+    display: none;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {%- seo -%}
+    <link rel="stylesheet" href="{{ "/assets/css/styles.css" | relative_url }}">
+    {%- feed_meta -%}
+  </head>
+  <body>
+    <div class="terminal-wrapper">
+      <div class="terminal-window">
+        <div class="terminal-bar">
+          <div class="terminal-controls">
+            <span class="control close"></span>
+            <span class="control minimize"></span>
+            <span class="control maximize"></span>
+          </div>
+          <div class="terminal-title">tobib-dev@portfolio: ~{{ page.url }}</div>
+        </div>
+        <div class="terminal-content">
+            <header class="navigation">
+              <nav>
+                <span class="path-root">~</span>
+                <a href="{{ "/" | relative_url }}" class="nav-link">/home</a>
+                <a href="{{ "/about/" | relative_url }}" class="nav-link">/about</a>
+                {% if site.github_username %}
+                <a href="https://github.com/{{ site.github_username }}" class="nav-link" target="_blank">/github</a>
+                {% endif %}
+              </nav>
+            </header>
+
+          <main>
+            {{ content }}
+          </main>
+
+          <footer class="terminal-footer">
+            <span class="prompt">$</span> <span class="blinking-cursor">_</span>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
