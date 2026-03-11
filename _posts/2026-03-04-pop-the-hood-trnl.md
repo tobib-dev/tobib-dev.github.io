@@ -176,12 +176,14 @@ type routeMatch struct {
 *Source: Wikipedia*
 
 
-The time and space optimizations of tries (specifically Radix tries) make them ideal not just for HTTP Package routing but IP Address routing.
+The time and space optimizations of tries (specifically Radix tries) make them ideal not just for HTTP Package routing but also for IP Address routing at the Network Layer.
 Trnl is not to be used in production, as it still lacks more reliable features, such as the following:
 Client Interface: You might have noticed that the Trnl README only provides examples from an HTTP server. This is because Trnl doesn’t have a client interface at the moment; hence, there is no way to create client apps using Trnl. Go’s standard HTTP package does provide both client and server implementations. Trnl is an experimental project, and while I do plan on adding a client interface at a later date, it’s not in the roadmap for the short-term
 Context: The current Trnl implementation doesn’t provide request context. Contexts are very important because they provide databases with information about the request state. This is especially useful in a network interruption, as you don’t want databases proceeding with transactions during an interruption. This is also a feature that I plan to introduce later.
 Query Parameters: There are currently no query parameter features for Trnl, which means that if a user makes a request with a query parameter such as ```“/api/users?sort=asc”```, the sort parameter will be lost.
 If you made it this far, I’m extremely grateful you took the time to read this article. I know it was a long read; I was dreading it while writing, but there was just no easy way for me to get this across. I hope you have learned something from this article. See you at the next one.
+
+Check out the package repo here - ![Alt text](https://github.com/tobib-dev/trnl "Trnl GitHub Repo")
 
 ## References 
 - Beej’s Guide to Network Programming - [BGNET](https://beej.us/guide/bgnet/)
