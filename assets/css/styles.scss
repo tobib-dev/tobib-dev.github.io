@@ -6,7 +6,7 @@
 
 // Variables (Tokyo Night Palette inspired)
 $bg-body: #1a1b26;
-$bg-terminal: #24283b; // Slightly lighter than body
+$bg-terminal: #24283b;
 $text-main: #c0caf5;
 $text-muted: #565f89;
 $border-color: #414868;
@@ -56,6 +56,7 @@ h1 {
     border-bottom: 2px dashed $border-color;
     padding-bottom: 0.5rem;
 }
+
 h2 {
     font-size: 1.5rem;
 }
@@ -77,7 +78,6 @@ p {
 
 ul {
     list-style-type: square;
-
     li::marker {
         color: $color-yellow;
     }
@@ -93,11 +93,12 @@ code {
 }
 
 pre {
-    background: #16161e; // Darker block
+    background: #16161e;
     padding: 1rem;
     border-radius: 6px;
     border: 1px solid $border-color;
     overflow-x: auto;
+    margin-bottom: 1.5rem;
 
     code {
         background: none;
@@ -114,32 +115,33 @@ blockquote {
     font-style: italic;
 }
 
-// Add this to your Utilities or Base section
 img {
-    max-width: 100%; // Prevents image from being wider than the terminal
-    height: auto; // Maintains aspect ratio to avoid distortion
+    max-width: 100%;
+    height: auto;
     display: block;
-    margin: 1.5rem auto; // Centers images and gives them breathing room
+    margin: 1.5rem auto;
     border-radius: 4px;
     border: 1px solid $border-color;
-    image-rendering: auto; // Ensures the browser uses standard smoothing
 }
 
 // Terminal Layout
 .terminal-wrapper {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: flex-start; // Centers vertically? No, start is better for long content
+    padding: 3rem 1rem; // Add outer margin (padding on wrapper)
     min-height: 100vh;
-    padding: 60px 40px;
-    @media (max-width: 600px) {
-        padding: 20px 10px;
-    } // Flush on mobile
+    width: 100%;
+
+    @media (min-width: 768px) {
+        align-items: center; // Center vertically on larger screens if content is short
+        padding: 3rem;
+    }
 }
 
 .terminal-window {
     width: 100%;
-    max-width: 1100px;
+    max-width: 900px; // Constrain width for readability
     background-color: $bg-terminal;
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -147,23 +149,25 @@ img {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    min-height: 90vh;
+    min-height: 60vh; // Ensure it has some height
 }
 
 .terminal-bar {
     background-color: #16161e;
     height: 40px;
-    padding: 10px 15px;
+    padding: 0 15px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid $border-color;
     position: relative;
     user-select: none;
+    flex-shrink: 0;
 }
 
 .terminal-controls {
     display: flex;
     gap: 8px;
+    z-index: 10;
 }
 
 .control {
@@ -183,43 +187,49 @@ img {
 }
 
 .terminal-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: $text-muted;
     font-weight: 500;
-    letter-spacing: 0.5px;
-    color: $color-white;
+
+    @media (max-width: 600px) {
+        display: none; // Hide on small screens to avoid overlap
+    }
 }
 
 .terminal-content {
-    padding: 40px 60px;
+    // We remove padding here to allow the nav to be full width
+    padding: 0;
     flex: 1;
     display: flex;
     flex-direction: column;
-
-    @media (max-width: 600px) {
-        padding: 20px;
-    }
+    position: relative;
 }
 
 // Navigation
-// Navigation - Tabbed Style
 .navigation {
-    margin: -30px -30px 30px -30px; // Flushes the nav to the window edges
-    background-color: darken($bg-terminal, 4%);
-    display: flex;
-    justify-content: center;
+    background-color: darken($bg-terminal, 3%);
     border-bottom: 1px solid $border-color;
+    display: flex;
+    justify-content: center; // Center the nav container
+    width: 100%;
 
     nav {
         display: flex;
-        gap: 10px; // Small gap between tabs
-        flex_wrap: nowrap;
+        flex-wrap: wrap; // Prevent crumpling on small screens
+        justify-content: center; // Center the items
+        gap: 0; // Gap handled by padding of links
+        width: 100%;
     }
 
     .nav-link {
-        padding: 12px 20px;
+        padding: 1rem 1.5rem;
         color: $text-muted;
-        background-color: transparent;
-        border-right: none;
-        font-size: 0.85rem;
+        font-weight: 500;
+        border-bottom: 2px solid transparent;
         transition: all 0.2s;
 
         &:hover {
@@ -228,24 +238,39 @@ img {
             text-decoration: none;
         }
 
-        // Simulating an "Active" tab look
+        // Active state simulation via liquid URL match or JS
         &[href="{{ page.url | relative_url }}"] {
             color: $color-blue;
-            background-color: $bg-terminal;
-            border-bottom: 2px solid $color-blue;
+            border-bottom-color: $color-blue;
+            background-color: rgba($color-blue, 0.05);
         }
     }
 }
 
-// Footer / Prompt
+// Main Content Area
+main {
+    padding: 2rem 3rem; // Add the padding here instead
+    flex: 1;
+    width: 100%;
+
+    @media (max-width: 600px) {
+        padding: 1.5rem;
+    }
+}
+
+.path-root {
+    display: none;
+}
+
+// Footer
 .terminal-footer {
-    margin-top: auto;
-    padding-top: 40px;
-    padding-bottom: 20px;
+    padding: 1rem;
+    border-top: 1px solid rgba($border-color, 0.3);
     color: $text-muted;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: darken($bg-terminal, 2%);
 }
 
 .prompt {
@@ -275,32 +300,4 @@ img {
 // Utilities
 .text-center {
     text-align: center;
-}
-
-// Mobile Responsiveness
-@media (max-width: 600px) {
-    .terminal-wrapper {
-        padding: 10px;
-        align-items: flex-start; // Align to top on mobile
-    }
-
-    .terminal-window {
-        min-height: 80vh;
-    }
-
-    .terminal-content {
-        padding: 15px;
-    }
-
-    .terminal-title {
-        display: none;
-    }
-}
-
-main {
-    margin-bottom: 40px;
-}
-
-.path-root {
-    display: none;
 }
