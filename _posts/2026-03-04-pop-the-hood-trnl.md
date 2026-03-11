@@ -183,7 +183,7 @@ Context: The current Trnl implementation doesn’t provide request context. Cont
 Query Parameters: There are currently no query parameter features for Trnl, which means that if a user makes a request with a query parameter such as ```“/api/users?sort=asc”```, the sort parameter will be lost.
 If you made it this far, I’m extremely grateful you took the time to read this article. I know it was a long read; I was dreading it while writing, but there was just no easy way for me to get this across. I hope you have learned something from this article. See you at the next one.
 
-Check out the package repo here - ![Alt text](https://github.com/tobib-dev/trnl "Trnl GitHub Repo")
+Check out the package repo here - [Trnl GitHub Repo](https://github.com/tobib-dev/trnl)
 
 ## References 
 - Beej’s Guide to Network Programming - [BGNET](https://beej.us/guide/bgnet/)
