@@ -6,8 +6,10 @@ layout: home
 title: Home
 permalink: /
 ---
-### Backend Engineer (Networking Programmer)
+### Software Engineer - AI Systems & Backend Platforms
 
-#### I'm a Software Engineer skilled at optimizing performance for distributed software solutions. My recent experience focuses around containerizing backend systems and asynchronous processing of data.
+#### I’m a Software Engineer focused on building reliable, high-performance distributed systems. My work centers on backend infrastructure, containerized services, and asynchronous data pipelines designed to scale under real-world workloads.
 
-I spend my free time reading epic fantasy novels such as Stormlight Archive or Lord of the Rings, watching my favorite soccer team, Arsernal FC, or hanging out with friends at the Dallas Developer Group Meetup. If you're in the DFW area feel free to stop by and connect with us.
+I care deeply about how systems behave in production. I enjoy instrumenting services, analyzing performance bottlenecks, and iterating on designs until they become simpler, faster, and more resilient. My approach to engineering is rooted in tight feedback loops: ship quickly, observe system behavior, refine the design, and continuously improve both the software and the processes around it.
+
+Outside of engineering, I enjoy reading epic fantasy novels like Stormlight Archive or Lord of the Rings, watching my favorite soccer team, Arsernal FC, and connecting with other engineers at the Dallas Developer Group Meetup. If you're in the DFW, area feel free to stop by and say hello.
