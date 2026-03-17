@@ -6,7 +6,7 @@ categories: project breakdown
 ---
 
 ## Premise
-About six weeks ago, I started working on Trnl — a lightweight HTTP project written in Go. I've built plenty of HTTP servers and APIs before, but I realized I'd been relying heavily on frameworks that "make it work" with little understanding of how the frameworks APIs and routing I used every day works under the hood.
+About six weeks ago, I started working on Trnl - a lightweight HTTP project written in Go. I've built plenty of HTTP servers and APIs before, but I realized I'd been relying heavily on frameworks that "make it work" with little understanding of how the frameworks APIs and routing I used every day works under the hood.
 
 Trnl is my attempt to pop the hood. It's been a hands-on way to dig into the networking layer, get more comfortable with transport protocols, and build out the core pieces of an HTTP server myself: from parsing requests and writing responses to designing a router that goes beyond simple static paths. Along the way, it's also pushed me to implement and reason about more complex data structures in a real system.
 
