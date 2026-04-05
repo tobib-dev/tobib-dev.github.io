@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {%- seo -%}
+    <link rel="stylesheet" href="{{ "/assets/css/styles.css" | relative_url }}">
+    {%- feed_meta -%}
+  </head>
+  <body>
+    <div class="terminal-wrapper">
+      <div class="terminal-window">
+        <div class="terminal-bar">
+          <div class="terminal-controls">
+            <span class="control close"></span>
+            <span class="control minimize"></span>
+            <span class="control maximize"></span>
+          </div>
+          <div class="terminal-title">tobib-dev@portfolio: ~{{ page.url }}</div>
+        </div>
+        <div class="terminal-content">
+            <header class="navigation">
+              <div class="nav-container">
+                <a class="site-title" href="{{ "/" | relative_url }}">
+                  <span class="prompt">></span> {{ site.title | default: "home" }}
+                </a>
+                <nav class="site-nav">
+                  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+                  <label for="nav-trigger" class="menu-icon">
+                    <span class="menu-bar"></span>
+                    <span class="menu-bar"></span>
+                    <span class="menu-bar"></span>
+                  </label>
+                  <div class="nav-links">
+                    <a href="{{ "/" | relative_url }}" class="nav-link">/home</a>
+                    <a href="{{ "/blog/" | relative_url }}" class="nav-link">/blog</a>
+                    <a href="{{ "/about/" | relative_url }}" class="nav-link">/about</a>
+                    {% if site.github_username %}
+                    <a href="https://github.com/{{ site.github_username }}" class="nav-link" target="_blank">/github</a>
+                    {% endif %}
+                  </div>
+                </nav>
+              </div>
+            </header>
+
+          <main>
+            {{ content }}
+          </main>
+
+          <footer class="terminal-footer">
+            <div class="footer-content">
+              <div class="footer-col footer-col-1">
+                <p class="footer-heading"><span class="prompt">$</span> contact</p>
+                <ul class="contact-list">
+                  <li>{{ site.title | default: "tobib-dev" }}</li>
+                  {% if site.email %}
+                  <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+                  {% endif %}
+                </ul>
+              </div>
+              <div class="footer-col footer-col-2">
+                <p class="footer-heading"><span class="prompt">$</span> links</p>
+                <ul class="social-links">
+                  {% if site.github_username %}
+                  <li><a href="https://github.com/{{ site.github_username }}" target="_blank">github/{{ site.github_username }}</a></li>
+                  {% endif %}
+                  {% if site.twitter_username %}
+                  <li><a href="https://twitter.com/{{ site.twitter_username }}" target="_blank">twitter/{{ site.twitter_username }}</a></li>
+                  {% endif %}
+                </ul>
+              </div>
+              <div class="footer-col footer-col-3">
+                <p class="footer-heading"><span class="prompt">$</span> about</p>
+                <p class="footer-description">{{ site.description | default: "A developer portfolio built with Jekyll." }}</p>
+              </div>
+            </div>
+            <div class="footer-bottom">
+              <span class="prompt">$</span> echo "© {{ 'now' | date: '%Y' }} {{ site.title | default: 'tobib-dev' }}" <span class="blinking-cursor">_</span>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
