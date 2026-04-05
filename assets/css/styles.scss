@@ -128,20 +128,20 @@ img {
 .terminal-wrapper {
     display: flex;
     justify-content: center;
-    align-items: flex-start; // Centers vertically? No, start is better for long content
-    padding: 3rem 1rem; // Add outer margin (padding on wrapper)
+    align-items: flex-start;
+    padding: 3rem 1rem;
     min-height: 100vh;
     width: 100%;
 
     @media (min-width: 768px) {
-        align-items: center; // Center vertically on larger screens if content is short
+        align-items: center;
         padding: 3rem;
     }
 }
 
 .terminal-window {
     width: 100%;
-    max-width: 900px; // Constrain width for readability
+    max-width: 900px;
     background-color: $bg-terminal;
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -149,7 +149,7 @@ img {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    min-height: 60vh; // Ensure it has some height
+    min-height: 60vh;
 }
 
 .terminal-bar {
@@ -196,12 +196,11 @@ img {
     font-weight: 500;
 
     @media (max-width: 600px) {
-        display: none; // Hide on small screens to avoid overlap
+        display: none;
     }
 }
 
 .terminal-content {
-    // We remove padding here to allow the nav to be full width
     padding: 0;
     flex: 1;
     display: flex;
@@ -209,47 +208,76 @@ img {
     position: relative;
 }
 
-// Navigation
+// Navigation (Minima Style)
 .navigation {
     background-color: darken($bg-terminal, 3%);
     border-bottom: 1px solid $border-color;
-    display: flex;
-    justify-content: center; // Center the nav container
-    width: 100%;
+    padding: 1rem 2rem;
 
-    nav {
+    @media (max-width: 600px) {
+        padding: 1rem;
+    }
+
+    .nav-container {
         display: flex;
-        flex-wrap: wrap; // Prevent crumpling on small screens
-        justify-content: center; // Center the items
-        gap: 0; // Gap handled by padding of links
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
+        flex-direction: column;
+        flex-wrap: nowrap; // Allow wrapping on small screens
+        gap: 1rem;
+    }
+
+    .site-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: $color-green;
+        white-space: nowrap;
+
+        &:hover {
+            text-decoration: none;
+            color: $color-cyan;
+        }
+
+        .prompt {
+            color: $color-magenta;
+            margin-right: 5px;
+        }
+    }
+
+    .site-nav {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+
+        @media (max-width: 600px) {
+            margin-top: 0.5rem;
+            width: 100%;
+            justify-content: flex-end; // Keep aligned right or center if preferred
+            gap: 1rem;
+        }
     }
 
     .nav-link {
-        padding: 1rem 1.5rem;
         color: $text-muted;
         font-weight: 500;
-        border-bottom: 2px solid transparent;
-        transition: all 0.2s;
+        transition: color 0.2s;
 
         &:hover {
             color: $color-cyan;
-            background-color: rgba($color-blue, 0.05);
             text-decoration: none;
         }
 
-        // Active state simulation via liquid URL match or JS
+        // Active state simulation
         &[href="{{ page.url | relative_url }}"] {
             color: $color-blue;
-            border-bottom-color: $color-blue;
-            background-color: rgba($color-blue, 0.05);
         }
     }
 }
 
 // Main Content Area
 main {
-    padding: 2rem 3rem; // Add the padding here instead
+    padding: 2rem 3rem;
     flex: 1;
     width: 100%;
 
@@ -258,15 +286,12 @@ main {
     }
 }
 
-.path-root {
-    display: none;
-}
-
 // Footer
 .terminal-footer {
     padding: 1rem;
     border-top: 1px solid rgba($border-color, 0.3);
     color: $text-muted;
+    flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;

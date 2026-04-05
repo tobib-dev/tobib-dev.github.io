@@ -20,14 +20,17 @@
         </div>
         <div class="terminal-content">
             <header class="navigation">
-              <nav>
-                <span class="path-root">~</span>
-                <a href="{{ "/" | relative_url }}" class="nav-link">/home</a>
-                <a href="{{ "/about/" | relative_url }}" class="nav-link">/about</a>
-                {% if site.github_username %}
-                <a href="https://github.com/{{ site.github_username }}" class="nav-link" target="_blank">/github</a>
-                {% endif %}
-              </nav>
+              <div class="nav-container">
+                <a class="site-title" href="{{ "/" | relative_url }}">
+                  <span class="prompt">></span> {{ site.title | default: "home" }}
+                </a>
+                <nav class="site-nav">
+                  <a href="{{ "/about/" | relative_url }}" class="nav-link">/about</a>
+                  {% if site.github_username %}
+                  <a href="https://github.com/{{ site.github_username }}" class="nav-link" target="_blank">/github</a>
+                  {% endif %}
+                </nav>
+              </div>
             </header>
 
           <main>

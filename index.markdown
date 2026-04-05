@@ -8,7 +8,7 @@ permalink: /
 ---
 ### Software Engineer - AI Systems & Backend Platforms
 
-#### I’m a Software Engineer focused on building reliable, high-performance distributed systems. My work centers on backend infrastructure, containerized services, and asynchronous data pipelines designed to scale under real-world workloads.
+#### I engineer backend infrastructure and distributed services that turn complex systems into reliable, production-ready platforms.
 
 I care deeply about how systems behave in production. I enjoy instrumenting services, analyzing performance bottlenecks, and iterating on designs until they become simpler, faster, and more resilient. My approach to engineering is rooted in tight feedback loops: ship quickly, observe system behavior, refine the design, and continuously improve both the software and the processes around it.
 
