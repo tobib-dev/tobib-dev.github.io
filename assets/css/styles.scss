@@ -212,19 +212,22 @@ img {
 .navigation {
     background-color: darken($bg-terminal, 3%);
     border-bottom: 1px solid $border-color;
-    padding: 1rem 2rem;
+    padding: 0.75rem 2rem;
+    position: relative;
 
     @media (max-width: 600px) {
-        padding: 1rem;
+        padding: 0.75rem 1rem;
     }
 
     .nav-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 100%;
-        flex-direction: column;
-        flex-wrap: nowrap; // Allow wrapping on small screens
+    }
+
+    .nav-left {
+        display: flex;
+        align-items: center;
         gap: 1rem;
     }
 
@@ -245,32 +248,82 @@ img {
         }
     }
 
+    .site-tagline {
+        font-size: 0.75rem;
+        color: $text-muted;
+        margin: 0;
+        border-left: 1px solid $border-color;
+        padding-left: 1rem;
+
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
+
     .site-nav {
+        position: relative;
+    }
+
+    .nav-trigger {
+        display: none;
+    }
+
+    .menu-icon {
+        display: none;
+        cursor: pointer;
+        padding: 0.5rem;
+
+        .menu-bar {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background-color: $text-muted;
+            margin: 4px 0;
+            transition: all 0.3s;
+        }
+
+        @media (max-width: 600px) {
+            display: block;
+        }
+    }
+
+    .nav-links {
         display: flex;
         gap: 1.5rem;
         align-items: center;
 
         @media (max-width: 600px) {
-            margin-top: 0.5rem;
-            width: 100%;
-            justify-content: flex-end; // Keep aligned right or center if preferred
-            gap: 1rem;
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: darken($bg-terminal, 3%);
+            flex-direction: column;
+            padding: 1rem 1.5rem;
+            gap: 0.5rem;
+            border: 1px solid $border-color;
+            border-radius: 4px;
+            z-index: 100;
+            min-width: 120px;
+            text-align: right;
+        }
+    }
+
+    .nav-trigger:checked ~ .nav-links {
+        @media (max-width: 600px) {
+            display: flex;
         }
     }
 
     .nav-link {
         color: $text-muted;
         font-weight: 500;
+        font-size: 0.9rem;
         transition: color 0.2s;
 
         &:hover {
             color: $color-cyan;
             text-decoration: none;
-        }
-
-        // Active state simulation
-        &[href="{{ page.url | relative_url }}"] {
-            color: $color-blue;
         }
     }
 }
@@ -288,14 +341,79 @@ main {
 
 // Footer
 .terminal-footer {
-    padding: 1rem;
-    border-top: 1px solid rgba($border-color, 0.3);
+    padding: 1.5rem 2rem;
+    border-top: 1px solid $border-color;
     color: $text-muted;
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: darken($bg-terminal, 2%);
+    background-color: darken($bg-terminal, 3%);
+
+    @media (max-width: 600px) {
+        padding: 1rem;
+    }
+
+    .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+
+        @media (max-width: 600px) {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+    }
+
+    .footer-col {
+        flex: 1;
+        min-width: 150px;
+
+        @media (max-width: 600px) {
+            min-width: 100%;
+        }
+    }
+
+    .footer-heading {
+        font-size: 0.9rem;
+        color: $color-blue;
+        margin: 0 0 0.75rem 0;
+        font-weight: 600;
+
+        .prompt {
+            color: $color-magenta;
+        }
+    }
+
+    .contact-list,
+    .social-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 0.85rem;
+
+        li {
+            margin-bottom: 0.35rem;
+        }
+
+        a {
+            color: $color-cyan;
+            
+            &:hover {
+                color: $color-green;
+            }
+        }
+    }
+
+    .footer-description {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .footer-bottom {
+        padding-top: 1rem;
+        border-top: 1px dashed rgba($border-color, 0.5);
+        font-size: 0.8rem;
+        text-align: center;
+    }
 }
 
 .prompt {

@@ -43,7 +43,19 @@
             </header>
 
           <main>
-            {{ content }}
+            <article class="post">
+              <header class="post-header">
+                <h1>{{ page.title | escape }}</h1>
+                <p class="post-meta">
+                  <span class="prompt">$</span> date: {{ page.date | date: "%b %-d, %Y" }}
+                  {%- if page.author -%} • {{ page.author | escape }}{%- endif -%}
+                </p>
+              </header>
+
+              <div class="post-content">
+                {{ content }}
+              </div>
+            </article>
           </main>
 
           <footer class="terminal-footer">
